@@ -9665,7 +9665,13 @@ var App = function (_React$Component) {
 	function App(props) {
 		_classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+		_this.state = {
+			Accounts: [],
+			Contacts: {}
+		};
+		return _this;
 	}
 
 	_createClass(App, [{

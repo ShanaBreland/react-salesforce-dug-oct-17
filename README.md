@@ -106,6 +106,26 @@ public class OutlookController
 
 You may have noticed that we created an inner class or wrapper class called "StateBundle". We're using this to act as a single package that will be returned from a method, and our client side code will destructure this into our React app's state. More to come on that later... read/code onwards!
 
+Let's add a method to **OutlookController** that actually gets a list of Accounts and creates a map of Contacts, tosses those into an instance of StateBundle, and returns it.
 
+```java
+@RemoteAction
+public static StateBundle getState()
+{
+  StateBundle state = new StateBundle();
+  state.accounts = new List<Account>();
+  state.contacts = new Map<Id, List<Contact>>();
+  
+  for(Account a : [SELECT Id, Name, (SELECT Id, Name FROM Contacts) FROM Account LIMIT 10])
+  {
+    state.accounts.add(a);
+    state.contacts.put(a.Id, a.Contacts);
+  }
+  
+  return state;
+}
+```
+
+A quick note: we're using the `@RemoteAction` annotation, as this will allow our client side code to use Visualforce remoting to fetch data.
 
 ### ... but you can skip ahead to the `finish` line too
