@@ -42,7 +42,7 @@ Here's roughly what you want `App.js` to look like at the start:
 ```
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '/App.css';
+import './App.css';
 
 class App extends React.Component {
 	constructor(props) {
