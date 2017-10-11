@@ -1,0 +1,7 @@
+<apex:page standardStylesheets="false" showHeader="false" showChat="false" sidebar="false" docType="html-5.0" applyBodyTag="false">
+    <apex:slds/>
+    <body>
+		<div id="app" class="slds-scope"></div>
+		<script type="text/javascript" src="{!$Resource.Outlook}"></script>
+	</body>
+</apex:page>

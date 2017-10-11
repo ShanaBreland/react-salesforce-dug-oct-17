@@ -67,8 +67,28 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 We're importing the **react** and **react-dom** packages that will allow us to build React components, use its lifecycle methods, and mount our application into the page's DOM inside of an element that has `id="app"` (we'll see what this looks like later when we create our Visualforce page).
 
-Before we keep going, let's ensure that Webpack will bundle our app and drop it as `build/app.js`. Ensure that you are currently in the `start` folder, and run `webpack --watch` and check to see if `app.js` appears in the `build` directory.
+Before we keep going, let's ensure that Webpack will bundle our app and drop it as `build/app.js`. Ensure that you are currently in the `start` folder, and run `webpack --watch` and check to see if `app.js` appears in the `build` directory. If you're all set, you'll see no red error messages screaming at you!
 
+Since we passed `webpack` the `--watch` setting, it will continue to watch the `App.js` file and any files that it references (and so on) for saved changes, and when those occur, it will rebuild to `build/app.js`.
 
+Alright, let's switch gears and prepare our Visualforce page and static resource. For the static resource, pop into **Setup > Build > Develop > Static Resources**, click **New**, give it the name "Outlook", and we're going to upload the `app.js` from our `build` directory. Click Save.
+
+For our Visualforce page, pop over to Salesforce and open **Developer Console** (sin!), and click **File > New > Visualforce Page**. Give it a name like "Outlook" and click OK.
+
+Here's roughly what you want for the Visualforce page right now:
+
+```
+<apex:page standardStylesheets="false" showHeader="false" showChat="false" sidebar="false" docType="html-5.0" applyBodyTag="false">
+    <apex:slds/>
+    <body>
+		<div id="app" class="slds-scope"></div>
+		<script type="text/javascript" src="{!$Resource.Outlook}"></script>
+	</body>
+</apex:page>
+```
+
+Note that if your static resource is not named "Outlook" (shame on you, btw), you should update that for your `script` tag above.
+
+Sweet! Click on **Preview** in Developer Console, and you should see a blank white page that says "Hello New York City!"
 
 ### ... but you can skip ahead to the `finish` line too
