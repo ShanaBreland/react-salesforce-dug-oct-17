@@ -87,8 +87,25 @@ Here's roughly what you want for the Visualforce page right now:
 </apex:page>
 ```
 
-Note that if your static resource is not named "Outlook" (shame on you, btw), you should update that for your `script` tag above.
+Note that if your static resource is not named "Outlook" (shame on you, btw), you should update that for your `script` tag above. Sweet! Click on **Preview** in Developer Console, and you should see a blank white page that says "Hello New York City!"
 
-Sweet! Click on **Preview** in Developer Console, and you should see a blank white page that says "Hello New York City!"
+Since React is data driven based on state, let's source some data for our page. We're going to use an Apex controller, so let's grab some data from Salesforce. We're going to use an Apex class, so head back to **Developer Console** (if you ever left its highly performing look and feel), and click **File > New > Apex Class**. Give this a name like "OutlookController" and click OK.
+
+Here's roughly what you want to see for the Apex class (note those curly braces y'all!):
+
+```java
+public class OutlookController
+{
+	public class StateBundle
+    {
+        List<Account> accounts;
+        Map<Id, List<Contact>> contacts;
+    }
+}
+```
+
+You may have noticed that we created an inner class or wrapper class called "StateBundle". We're using this to act as a single package that will be returned from a method, and our client side code will destructure this into our React app's state. More to come on that later... read/code onwards!
+
+
 
 ### ... but you can skip ahead to the `finish` line too
