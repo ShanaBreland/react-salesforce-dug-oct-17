@@ -1,9 +1,9 @@
 let path = require('path');
 
 module.exports = {
-	entry: './dev/js/App.js',
+	entry: './dev/App.js',
 	output: {
-		path: path.resolve(__dirname, './resource-bundles/OutlookUI.resource/js'),
+		path: path.resolve(__dirname, './build'),
 		filename: 'app.js'
 	},
 	module: {
