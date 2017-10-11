@@ -67,6 +67,8 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 We're importing the **react** and **react-dom** packages that will allow us to build React components, use its lifecycle methods, and mount our application into the page's DOM inside of an element that has `id="app"` (we'll see what this looks like later when we create our Visualforce page).
 
+Before we keep going, let's ensure that Webpack will bundle our app and drop it as `build/app.js`. Ensure that you are currently in the `start` folder, and run `webpack --watch` and check to see if `app.js` appears in the `build` directory.
+
 
 
 ### ... but you can skip ahead to the `finish` line too
