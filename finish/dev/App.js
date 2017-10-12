@@ -9,8 +9,16 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			Accounts: [],
-			Contacts: {}
+			Contacts: {},
+			SelectedAccountId: ''
 		}
+		this.setAccount = this.setAccount.bind(this);
+	}
+
+	setAccount(accountId) {
+		this.setState({
+			SelectedAccountId: accountId
+		});
 	}
 
 	componentWillMount() {
@@ -22,8 +30,15 @@ class App extends React.Component {
 			<div>
 				{					
 					this.state.Accounts.map(
-						Account => <List key={Account.Id} Account={Account} />
+						Account => <List key={Account.Id} Data={Account} setAccount={this.setAccount} />
 					)
+				}
+				{
+					this.state.SelectedAccountId in this.state.Contacts
+					? this.state.Contacts[this.state.SelectedAccountId].map(
+							Contact => <List key={Contact.Id} Data={Contact} setAccount={this.setAccount} />
+						)
+					: null
 				}
 			</div>
 		);

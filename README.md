@@ -205,7 +205,7 @@ class List extends React.Component {
 	render() {
 		return(
 			<div>
-				{this.props.Account.Name}
+				{this.props.Data.Name}
 			</div>
 		);
 	}
@@ -224,7 +224,7 @@ render() {
 		<div>
 			{					
 				this.state.Accounts.map(
-					Account => <List key={Account.Id} Account={Account} />
+					Account => <List key={Account.Id} Data={Account} />
 				)
 			}
 		</div>
@@ -238,7 +238,95 @@ Since we're using the `List` module, we need to import it similar to `Controller
 import List from './List';
 ```
 
+Upload the `build/app.js` file as your static resource, refresh your Visualforce page, and you should see that we have a list of Accounts sitting on the page! Let's take this a step further to make our app interactive and reuse the `List` component.
 
-Go ah
+Add something called `SelectedAccountId` to the `App.js` state.
+
+```jsx
+this.state = {
+	Accounts: [],
+	Contacts: {},
+	SelectedAccountId: ''
+}
+```
+
+Let's also create a new function in `App.js` called `setAccount`, ensure that we bind it to the `this` of `App.js`, and take a parameter that is used to set the `state` of `SelectedAccountId`.
+
+```jsx
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			Accounts: [],
+			Contacts: {},
+			SelectedAccountId: ''
+		}
+		this.setAccount = this.setAccount.bind(this);
+	}
+
+	setAccount(accountId) {
+		this.setState({
+			SelectedAccountId: accountId
+		});
+	}
+	... // more App.js fun continues below
+```
+
+We'll want to pass down the `setAccount` function to each `List` to ensure that when a user clicks an Account, it displays the related contacts (if there are any). So let's add a prop called `setAccount` to `List`.
+
+```jsx
+{					
+	this.state.Accounts.map(
+		Account => <List key={Account.Id} Data={Account} setAccount={this.setAccount} />
+	)
+}
+```
+
+Switching to our `List.js` file, we'll want to ensure that we bind the `onClick` event to this function, and pass up the ID to this function.
+
+```jsx
+return(
+	<div onClick={() => this.props.setAccount(this.props.Data.Id)}>
+		{this.props.Data.Name}
+	</div>
+);
+```
+
+Awesome! If you were to upload your `build/app.js` file now, you'd see nothing happen on the UI when you click around... but if you open React Dev Tools you'll see that `state.SelectedAccountId` is being set as you click.
+
+**Great. It's UI that doesn't do anything.**
+
+Fair, but we can reuse our `List` component to show the related contacts for the selected account. Let's update the `render` function of `App.js` to look like the below, which will dynamically render another set of `List` components based on the array returned by referencing the `state.Contacts` property that is the value of `state.SelectedAccountId`.
+
+```jsx
+render() {
+	return(
+		<div>
+			{					
+				this.state.Accounts.map(
+					Account => <List key={Account.Id} Data={Account} setAccount={this.setAccount} />
+				)
+			}
+			{
+				this.state.SelectedAccountId in this.state.Contacts
+				? this.state.Contacts[this.state.SelectedAccountId].map(
+						Contact => <List key={Contact.Id} Data={Contact} setAccount={this.setAccount} />
+					)
+				: null
+			}
+		</div>
+	);
+}
+```
+
+Save that, upload `build/app.js` to your static resource, refresh your Visualforce page (so many steps...), and you should be able to click an account name and see some contacts rendered at the bottom!
+
+**But the UI still looks terrible... I thought React made everything look like Airbnb / LinkedIn / Trailhead / [insert your favorite startup here]!**
+
+Nope, that's still the job of CSS. If you're still reading this, I bet you're ready to make this look amazing! Also, this isn't focused on CSS and making the web look and behave beautifully, so I'm not going into tons of detail about what the below does. Hopefully you can take my word for it.
+
+```jsx
+
+```
 
 ### ... but you can skip ahead to the `finish` line too

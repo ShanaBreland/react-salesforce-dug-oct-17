@@ -9659,10 +9659,14 @@ var List = function (_React$Component) {
 	_createClass(List, [{
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			return _react2.default.createElement(
 				'div',
-				null,
-				this.props.Account.Name
+				{ onClick: function onClick() {
+						return _this2.props.setAccount(_this2.props.Data.Id);
+					} },
+				this.props.Data.Name
 			);
 		}
 	}]);
@@ -9751,12 +9755,21 @@ var App = function (_React$Component) {
 
 		_this.state = {
 			Accounts: [],
-			Contacts: {}
+			Contacts: {},
+			SelectedAccountId: ''
 		};
+		_this.setAccount = _this.setAccount.bind(_this);
 		return _this;
 	}
 
 	_createClass(App, [{
+		key: 'setAccount',
+		value: function setAccount(accountId) {
+			this.setState({
+				SelectedAccountId: accountId
+			});
+		}
+	}, {
 		key: 'componentWillMount',
 		value: function componentWillMount() {
 			(0, _Controller.getState)(this);
@@ -9764,12 +9777,17 @@ var App = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			return _react2.default.createElement(
 				'div',
 				null,
 				this.state.Accounts.map(function (Account) {
-					return _react2.default.createElement(_List2.default, { key: Account.Id, Account: Account });
-				})
+					return _react2.default.createElement(_List2.default, { key: Account.Id, Data: Account, setAccount: _this2.setAccount });
+				}),
+				this.state.SelectedAccountId in this.state.Contacts ? this.state.Contacts[this.state.SelectedAccountId].map(function (Contact) {
+					return _react2.default.createElement(_List2.default, { key: Contact.Id, Data: Contact, setAccount: _this2.setAccount });
+				}) : null
 			);
 		}
 	}]);

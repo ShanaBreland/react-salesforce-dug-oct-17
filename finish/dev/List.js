@@ -7,8 +7,8 @@ class List extends React.Component {
 
 	render() {
 		return(
-			<div>
-				{this.props.Account.Name}
+			<div onClick={() => this.props.setAccount(this.props.Data.Id)}>
+				{this.props.Data.Name}
 			</div>
 		);
 	}
