@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
 import { getState } from './Controller';
+import List from './List';
 
 class App extends React.Component {
 	constructor(props) {
@@ -19,7 +20,11 @@ class App extends React.Component {
 	render() {
 		return(
 			<div>
-				Hello New York City!
+				{					
+					this.state.Accounts.map(
+						Account => <List key={Account.Id} Account={Account} />
+					)
+				}
 			</div>
 		);
 	}

@@ -192,6 +192,53 @@ If you're feeling antsy, save your file, check that Webpack bundled it to `build
 
 ![fun/state-of-the-react-app.png](fun/state-of-the-react-app.png)
 
+Let's take our newfound state and iterate over it to create a dynamic UI. Create a new file in `dev` called `List.js`. It will end up looking similar to `App.js`, though it will not have as many imports!
 
+```jsx
+import React from 'react';
+
+class List extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return(
+			<div>
+				{this.props.Account.Name}
+			</div>
+		);
+	}
+}
+
+export default List;
+```
+
+Note that we're using data binding to render data from an object called `Account` within `this.props`. Let's see how that happens by switching back to `App.js`.
+
+Within our `render` functions `div`, let's update it to iterate over the `this.state.Accounts` array. For each `Account`, we'll render a `List` component (this comes from our `List.js` file!).
+
+```jsx
+render() {
+	return(
+		<div>
+			{					
+				this.state.Accounts.map(
+					Account => <List key={Account.Id} Account={Account} />
+				)
+			}
+		</div>
+	);
+}
+```
+
+Since we're using the `List` module, we need to import it similar to `Controller`. Do this at the top of your `App.js` file with the other imports.
+
+```jsx
+import List from './List';
+```
+
+
+Go ah
 
 ### ... but you can skip ahead to the `finish` line too
