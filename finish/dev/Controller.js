@@ -1,4 +1,4 @@
-export default function getState(context) {
+export function getState(context) {
 	Visualforce.remoting.Manager.invokeAction(
 		'OutlookController.getState',
 		(result, event) => {

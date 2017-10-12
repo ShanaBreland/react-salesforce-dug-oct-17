@@ -136,6 +136,10 @@ Lastly, just like every other Visualforce page that relies upon an Apex class as
 </apex:page>
 ```
 
+**Hey! I thought this was a discussion about React! Why is there so much Apex and Visualforce?!**
+
+Cool your jets! We're popping back into React and front end code from here to the end.
+
 Let's flip back to our client side code and update the `constructor` method in our `dev/App.js` file to have `this.state`, which we'll use to store our data client side.
 
 ```jsx
@@ -181,7 +185,13 @@ componentWillMount() {
 In order to call the `getState` function, we also need to import our `Controller` module into `App.js`. Up with the other imports (top of file), we can drop in this line to import the `Controller.js` module. Since it is a JS module, we do not need to specify `.js`.
 
 ```js
-import './Controller';
+import { getState } from './Controller';
 ```
+
+If you're feeling antsy, save your file, check that Webpack bundled it to `build/app.js`, and upload a new version as your static resource. Hopefully you have installed the React Dev Tools extension, as you can open your browser's JavaScript console, click the **React** tab, and see both Accounts and Contacts have values in state!
+
+![fun/state-of-the-react-app.png](fun/state-of-the-react-app.png)
+
+
 
 ### ... but you can skip ahead to the `finish` line too
