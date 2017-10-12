@@ -97,10 +97,10 @@ Here's roughly what you want to see for the Apex class (note those curly braces 
 public class OutlookController
 {
 	public class StateBundle
-    {
-        List<Account> accounts;
-        Map<Id, List<Contact>> contacts;
-    }
+  {
+    List<Account> accounts;
+    Map<Id, List<Contact>> contacts;
+  }
 }
 ```
 
