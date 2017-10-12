@@ -7,7 +7,7 @@ class List extends React.Component {
 
 	render() {
 		return(
-			<div onClick={() => this.props.setAccount(this.props.Data.Id)}>
+			<div className="item" onClick={() => this.props.setAccount(this.props.Data.Id)}>
 				{this.props.Data.Name}
 			</div>
 		);

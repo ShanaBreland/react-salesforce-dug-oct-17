@@ -27,19 +27,23 @@ class App extends React.Component {
 
 	render() {
 		return(
-			<div>
-				{					
-					this.state.Accounts.map(
-						Account => <List key={Account.Id} Data={Account} setAccount={this.setAccount} />
-					)
-				}
-				{
-					this.state.SelectedAccountId in this.state.Contacts
-					? this.state.Contacts[this.state.SelectedAccountId].map(
-							Contact => <List key={Contact.Id} Data={Contact} setAccount={this.setAccount} />
+			<div className="container">
+				<div className="flex-half">
+					{
+						this.state.Accounts.map(
+							Account => <List key={Account.Id} Data={Account} setAccount={this.setAccount} />
 						)
-					: null
-				}
+					}
+				</div>
+				<div className="flex-half">
+					{
+						this.state.SelectedAccountId in this.state.Contacts
+						? this.state.Contacts[this.state.SelectedAccountId].map(
+								Contact => <List key={Contact.Id} Data={Contact} setAccount={this.setAccount} />
+							)
+						: null
+					}
+				</div>
 			</div>
 		);
 	}

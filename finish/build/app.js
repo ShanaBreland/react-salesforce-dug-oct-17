@@ -9657,13 +9657,13 @@ var List = function (_React$Component) {
 	}
 
 	_createClass(List, [{
-		key: 'render',
+		key: "render",
 		value: function render() {
 			var _this2 = this;
 
 			return _react2.default.createElement(
-				'div',
-				{ onClick: function onClick() {
+				"div",
+				{ className: "item", onClick: function onClick() {
 						return _this2.props.setAccount(_this2.props.Data.Id);
 					} },
 				this.props.Data.Name
@@ -9781,13 +9781,21 @@ var App = function (_React$Component) {
 
 			return _react2.default.createElement(
 				'div',
-				null,
-				this.state.Accounts.map(function (Account) {
-					return _react2.default.createElement(_List2.default, { key: Account.Id, Data: Account, setAccount: _this2.setAccount });
-				}),
-				this.state.SelectedAccountId in this.state.Contacts ? this.state.Contacts[this.state.SelectedAccountId].map(function (Contact) {
-					return _react2.default.createElement(_List2.default, { key: Contact.Id, Data: Contact, setAccount: _this2.setAccount });
-				}) : null
+				{ className: 'container' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'flex-half' },
+					this.state.Accounts.map(function (Account) {
+						return _react2.default.createElement(_List2.default, { key: Account.Id, Data: Account, setAccount: _this2.setAccount });
+					})
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'flex-half' },
+					this.state.SelectedAccountId in this.state.Contacts ? this.state.Contacts[this.state.SelectedAccountId].map(function (Contact) {
+						return _react2.default.createElement(_List2.default, { key: Contact.Id, Data: Contact, setAccount: _this2.setAccount });
+					}) : null
+				)
 			);
 		}
 	}]);
@@ -10684,7 +10692,7 @@ exports = module.exports = __webpack_require__(89)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "div.container {\n\twidth: 100vw;\n\tdisplay: flex;\n}\n\ndiv.flex-half {\n\twidth: 50vw;\n\tpadding: 0.25rem;\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\ndiv.item {\n\tmargin: 0.25rem;\n\twidth: 100%;\n\tpadding: 1rem;\n\tborder-style: dashed;\n\tborder-color: red;\n\tborder-radius: 1rem;\n}", ""]);
 
 // exports
 

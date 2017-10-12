@@ -325,8 +325,69 @@ Save that, upload `build/app.js` to your static resource, refresh your Visualfor
 
 Nope, that's still the job of CSS. If you're still reading this, I bet you're ready to make this look amazing! Also, this isn't focused on CSS and making the web look and behave beautifully, so I'm not going into tons of detail about what the below does. Hopefully you can take my word for it.
 
-```jsx
+Update your `App.js` to have a `render` method like this...
 
+```jsx
+render() {
+	return(
+		<div className="container">
+			<div className="flex-half">
+				{
+					this.state.Accounts.map(
+						Account => <List key={Account.Id} Data={Account} setAccount={this.setAccount} />
+					)
+				}
+			</div>
+			<div className="flex-half">
+				{
+					this.state.SelectedAccountId in this.state.Contacts
+					? this.state.Contacts[this.state.SelectedAccountId].map(
+							Contact => <List key={Contact.Id} Data={Contact} setAccount={this.setAccount} />
+						)
+					: null
+				}
+			</div>
+		</div>
+	);
+}
+```
+
+...and your `List.js` to have a `render` method like this...
+
+```jsx
+render() {
+	return(
+		<div className="item" onClick={() => this.props.setAccount(this.props.Data.Id)}>
+			{this.props.Data.Name}
+		</div>
+	);
+}
+
+```
+
+...and finally your `App.css` looks like this. Upload that static resource, and check out this cutting edge design!
+
+```css
+div.container {
+	width: 100vw;
+	display: flex;
+}
+
+div.flex-half {
+	width: 50vw;
+	padding: 0.25rem;
+	display: flex;
+	flex-direction: column;
+}
+
+div.item {
+	margin: 0.25rem;
+	width: 100%;
+	padding: 1rem;
+	border-style: dashed;
+	border-color: red;
+	border-radius: 1rem;
+}
 ```
 
 ### ... but you can skip ahead to the `finish` line too
