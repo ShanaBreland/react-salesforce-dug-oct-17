@@ -390,4 +390,41 @@ div.item {
 }
 ```
 
+**It's the new Uber (or is that Lyft)!**
+
+If you noticed one of your account names shows some escaped HTML characters like `United Oil &amp; Gas, UK`, we can use a module available on npm to handle this for us. In your terminal, ensure you are in the `start` directory and run `npm install lodash.unescape`. You can then update your `List.js` file to import this function, and wrap it around the data binding.
+
+```jsx
+import _unescape from 'lodash.unescape';
+
+...
+
+<div className="item" onClick={() => this.props.setAccount(this.props.Data.Id)}>
+	{_unescape(this.props.Data.Name)}
+</div>
+```
+
+Segue into how great the JavaScript ecosystem is... you can install tons of modules from npm like the below, which are all incredibly helpful and cut down on tons of code that you'd otherwise need to write.
+
+- [Moment](https://momentjs.com/)
+- [Numeral](http://numeraljs.com/)
+- [Lodash](https://lodash.com/), or its specific functions (don't ship useless stuff to your clients!)
+- [React Datepicker](https://github.com/Hacker0x01/react-datepicker)
+
+Also, if you're into **Sass** (as you can tell I am... zinger!), you can use **node-sass** in your project along with Webpack to compile into a single CSS file as part of shipping your bundle(s).
+
 ### ... but you can skip ahead to the `finish` line too
+
+If you're here, I get it... you like concise, clear instructions. I'll assume you've already used `cd` to get into the cloned repo directory.
+
+```bash
+cd finish
+npm install
+webpack
+```
+
+1. Create a static resource called "Outlook", upload the file from `build/app.js`
+1. Create an Apex class called "OutlookController", copy/paste from `src/classes/OutlookController.cls`
+1. Create a Visualforce page called "Outlook", copy/paste from `src/pages/Outlook.page`
+
+Le fin.
