@@ -7,7 +7,7 @@ Presented to the New York Salesforce Developer User Group in October 2017. Feel 
 1. Set up a new Salesforce Developer Edition org [here](https://developer.salesforce.com/signup), or use an existing DE org
 1. Install Node and npm from [NodeJS.org](https://nodejs.org/en/download/)
 1. Install React Dev Tools for [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
-1. Install Requestly for [Chrome](https://chrome.google.com/webstore/detail/requestly-redirect-url-mo/mdnleldcmiljblolnjhpnblkcekpdkpa?hl=en) or [Firefox](https://www.requestly.in/home/)
+1. Run the following to install [**webpack**](https://webpack.github.io/) as a command that can be used globally on your machine `sudo npm install -g webpack`
 
 ## Getting Started
 
