@@ -1,4 +1,4 @@
-<apex:page standardStylesheets="false" showHeader="false" showChat="false" sidebar="false" docType="html-5.0" applyBodyTag="false">
+<apex:page controller="OutlookController" standardStylesheets="false" showHeader="false" showChat="false" sidebar="false" docType="html-5.0" applyBodyTag="false">
     <apex:slds/>
     <body>
 		<div id="app" class="slds-scope"></div>

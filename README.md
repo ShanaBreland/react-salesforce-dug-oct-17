@@ -128,4 +128,60 @@ public static StateBundle getState()
 
 A quick note: we're using the `@RemoteAction` annotation, as this will allow our client side code to use Visualforce remoting to fetch data.
 
+Lastly, just like every other Visualforce page that relies upon an Apex class as its controller, we need to update our Visualforce page's `apex:page` component and set the `controller` attribute.
+
+```
+<apex:page controller="OutlookController" ... />
+	...
+</apex:page>
+```
+
+Let's flip back to our client side code and update the `constructor` method in our `dev/App.js` file to have `this.state`, which we'll use to store our data client side.
+
+```jsx
+constructor(props) {
+	super(props);
+	this.state = {
+		Accounts: [],
+		Contacts: {}
+	}
+}
+```
+
+Let's also create a new file called `Controller.js` within `dev`. We're going to fill this module with an exported function that makes a call to our Apex controller's remote action, and destructures the returned object in a callback function.
+
+```jsx
+export default function getState(context) {
+	Visualforce.remoting.Manager.invokeAction(
+		'OutlookController.getState',
+		(result, event) => {
+			if(event.statusCode === 200) {
+				context.setState({
+					Accounts: result.accounts,
+					Contacts: result.contacts
+				});
+			} else {
+				console.error('Errors galore!');
+				console.error(result);
+				console.error(event);
+			}
+		}
+	);
+}
+```
+
+Note that this function accepts a parameter `context`, which will be all of `this` from our `App.js`. To understand this, let's go back to our `App.js` file and update our `componentWillMount` function to look like the following:
+
+```jsx
+componentWillMount() {
+	getState(this);
+}
+```
+
+In order to call the `getState` function, we also need to import our `Controller` module into `App.js`. Up with the other imports (top of file), we can drop in this line to import the `Controller.js` module. Since it is a JS module, we do not need to specify `.js`.
+
+```js
+import './Controller';
+```
+
 ### ... but you can skip ahead to the `finish` line too

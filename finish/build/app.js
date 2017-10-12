@@ -9651,6 +9651,8 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 __webpack_require__(83);
 
+__webpack_require__(188);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9676,7 +9678,9 @@ var App = function (_React$Component) {
 
 	_createClass(App, [{
 		key: 'componentWillMount',
-		value: function componentWillMount() {}
+		value: function componentWillMount() {
+			getState(this);
+		}
 	}, {
 		key: 'render',
 		value: function render() {
@@ -22467,6 +22471,32 @@ function updateLink(linkElement, obj) {
 		URL.revokeObjectURL(oldSrc);
 }
 
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = getState;
+function getState(context) {
+	Visualforce.remoting.Manager.invokeAction('OutlookController.getState', function (result, event) {
+		if (event.statusCode === 200) {
+			context.setState({
+				Accounts: result.accounts,
+				Contacts: result.contacts
+			});
+		} else {
+			console.error('Errors galore!');
+			console.error(result);
+			console.error(event);
+		}
+	});
+}
 
 /***/ })
 /******/ ]);
